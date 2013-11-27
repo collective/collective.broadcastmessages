@@ -1,6 +1,7 @@
 *** Settings ***
 
 Library  Selenium2Library  timeout=10  implicit_wait=0.5
+Library  plone.app.robotframework.keywords.Debugging
 
 Suite Setup  Start browser
 Suite Teardown  Close All Browsers
@@ -15,6 +16,7 @@ Plone site
     [Tags]  start
     Go to  http://localhost:55001/plone/
     Page should contain  Plone site
+    #Stop
 
 *** Keywords ***
 

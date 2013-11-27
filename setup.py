@@ -42,7 +42,12 @@ setup(
     install_requires=[
         'setuptools',
     ],
-    extras_require={'test': ['plone.app.testing[robot]>=4.2.2']},
+    extras_require={
+        'test': [
+            'plone.app.testing[robot]>=4.2.2',
+            'plone.app.robotframework',
+            ]
+        },
     entry_points="""
     # -*- Entry points: -*-
     [z3c.autoinclude.plugin]
