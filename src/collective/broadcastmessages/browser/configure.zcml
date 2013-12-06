@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml">
+
+    <browser:viewlet
+        name="collective.broadcastmessages"
+        for="*"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        template="broadcast.pt"
+        permission="zope2.View"
+        layer=".interfaces.IBroadcastMessagesLayer"
+        />
+
+</configure>
