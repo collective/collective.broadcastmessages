@@ -8,7 +8,7 @@
         for="*"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"
         template="broadcast.pt"
-        permission="zope2.View"
+        permission="broadcast.View"
         layer=".interfaces.IBroadcastMessagesLayer"
         />
 

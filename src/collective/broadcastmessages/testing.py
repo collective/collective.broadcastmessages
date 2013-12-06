@@ -3,6 +3,7 @@ from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
 
 from plone.testing import z2
+from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 
 import collective.broadcastmessages
 
@@ -18,6 +19,10 @@ COLLECTIVE_BROADCASTMESSAGES_INTEGRATION_TESTING = IntegrationTesting(
     name="COLLECTIVE_BROADCASTMESSAGES_INTEGRATION_TESTING"
 )
 COLLECTIVE_BROADCASTMESSAGES_FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(COLLECTIVE_BROADCASTMESSAGES_FIXTURE, z2.ZSERVER_FIXTURE),
+    bases=(
+        COLLECTIVE_BROADCASTMESSAGES_FIXTURE,
+        AUTOLOGIN_LIBRARY_FIXTURE,
+        z2.ZSERVER_FIXTURE,
+    ),
     name="COLLECTIVE_BROADCASTMESSAGES_FUNCTIONAL_TESTING"
 )

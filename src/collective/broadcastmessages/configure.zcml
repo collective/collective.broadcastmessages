@@ -6,6 +6,10 @@
     i18n_domain="collective.broadcastmessages">
 
   <five:registerPackage package="." initialize=".initialize" />
+  
+  <permission id="broadcast.View"
+              title="collective.broadcastmessages: View"
+              />
 
   <include package=".browser" />
 
