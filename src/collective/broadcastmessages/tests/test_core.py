@@ -29,6 +29,10 @@ class TestExample(unittest.TestCase):
                         'package appears not to have been installed')
 
     def test_viewlet_shown_to_authenticated(self):
+        """
+        check that viewlet is included by main template
+        when rendered for logged-in user
+        """
         from collective.broadcastmessages.browser.interfaces import (
             IBroadcastMessagesLayer,
             )
@@ -36,6 +40,10 @@ class TestExample(unittest.TestCase):
         self.assertTrue('broadcast-messages' in self.portal())
 
     def test_viewlet_not_shown_to_anonymous(self):
+        """
+        check that viewlet is not included by main template
+        when rendered for anonymous user
+        """
         logout()
         from collective.broadcastmessages.browser.interfaces import (
             IBroadcastMessagesLayer,
