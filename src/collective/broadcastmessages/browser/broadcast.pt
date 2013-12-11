@@ -1,3 +1,3 @@
    <div id="broadcast-messages">
-       <div class="broadcastMessage">Broadcast Message</div>
+       <div class="broadcastMessage" tal:content="structure view/message_html">Broadcast Message</div>
    </div>

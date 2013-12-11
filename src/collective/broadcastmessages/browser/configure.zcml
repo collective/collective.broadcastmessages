@@ -9,6 +9,7 @@
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"
         template="broadcast.pt"
         permission="broadcast.View"
+        class=".viewlet.BroadcastMessageViewlet"
         layer=".interfaces.IBroadcastMessagesLayer"
         />
 
