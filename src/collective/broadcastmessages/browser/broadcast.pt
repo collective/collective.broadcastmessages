@@ -1,3 +1,5 @@
    <div id="broadcast-messages">
-       <div class="broadcastMessage" tal:content="structure view/message_html">Broadcast Message</div>
+       <div class="broadcastMessage" 
+            tal:repeat="message view/messages"
+            tal:content="structure message">Broadcast Message</div>
    </div>
