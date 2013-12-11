@@ -61,6 +61,19 @@ class TestExample(unittest.TestCase):
         self.assertFalse('broadcast-messages' in self.portal())
 
     def test_viewlet_not_shown_when_no_messages(self):
+        from collective.broadcastmessages.interfaces import IBroadcastMessages
+        sm = getSiteManager(self.portal)
+        sm.registerUtility(
+            component=[],
+            provided=IBroadcastMessages,
+            )
+        from collective.broadcastmessages.browser.interfaces import (
+            IBroadcastMessagesLayer,
+            )
+        alsoProvides(self.portal.REQUEST, IBroadcastMessagesLayer)
+        self.assertFalse('broadcast-messages' in self.portal())
+
+    def test_viewlet_not_shown_when_no_utility(self):
         from collective.broadcastmessages.browser.interfaces import (
             IBroadcastMessagesLayer,
             )
