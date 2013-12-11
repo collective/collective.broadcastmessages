@@ -29,18 +29,16 @@ class TestExample(unittest.TestCase):
                         'package appears not to have been installed')
 
     def test_viewlet_shown_to_authenticated(self):
-        view = self.portal.restrictedTraverse('index_html')
         from collective.broadcastmessages.browser.interfaces import (
             IBroadcastMessagesLayer,
             )
-        alsoProvides(view.REQUEST, IBroadcastMessagesLayer)
-        self.assertTrue('broadcast-messages' in view())
+        alsoProvides(self.portal.REQUEST, IBroadcastMessagesLayer)
+        self.assertTrue('broadcast-messages' in self.portal())
 
     def test_viewlet_not_shown_to_anonymous(self):
         logout()
-        view = self.portal.restrictedTraverse('index_html')
         from collective.broadcastmessages.browser.interfaces import (
             IBroadcastMessagesLayer,
             )
-        alsoProvides(view.REQUEST, IBroadcastMessagesLayer)
-        self.assertFalse('broadcast-messages' in view())
+        alsoProvides(self.portal.REQUEST, IBroadcastMessagesLayer)
+        self.assertFalse('broadcast-messages' in self.portal())
