@@ -53,6 +53,12 @@ class TestExample(unittest.TestCase):
         check that viewlet is not included by main template
         when rendered for anonymous user
         """
+        from collective.broadcastmessages.interfaces import IBroadcastMessages
+        sm = getSiteManager(self.portal)
+        sm.registerUtility(
+            component=['message1', 'message2'],
+            provided=IBroadcastMessages,
+            )
         logout()
         from collective.broadcastmessages.browser.interfaces import (
             IBroadcastMessagesLayer,
@@ -79,3 +85,15 @@ class TestExample(unittest.TestCase):
             )
         alsoProvides(self.portal.REQUEST, IBroadcastMessagesLayer)
         self.assertFalse('broadcast-messages' in self.portal())
+
+    def test_viewlet_when_utility_registered_at_startup(self):
+        from collective.broadcastmessages.browser.interfaces import (
+            IBroadcastMessagesLayer,
+            )
+        from collective.broadcastmessages.messages import (
+            registerBroadcastMessages
+            )
+        alsoProvides(self.portal.REQUEST, IBroadcastMessagesLayer)
+        registerBroadcastMessages(self.portal)
+        self.assertTrue('broadcast-messages' in self.portal())
+        self.assertTrue('maintenance' in self.portal())

@@ -12,7 +12,8 @@ def initializeFromFileSystem(event):
         root = conn.root()
         app = root['Application']
         try:
-            registerUtilities(app)
+            for portal in app.objectValues(spec="Plone Site"):
+                registerBroadcastMessages(portal)
             transaction.commit()
         except:
             transaction.abort()
@@ -21,10 +22,9 @@ def initializeFromFileSystem(event):
         conn.close()
 
 
-def registerUtilities(app):
-    for portal in app.objectValues(spec="Plone Site"):
-        sm = getSiteManager(portal)
-        sm.registerUtility(
-            component=['message1', 'message2'],
-            provided=IBroadcastMessages,
-            )
+def registerBroadcastMessages(portal):
+    sm = getSiteManager(portal)
+    sm.registerUtility(
+        component=['maintenance', 'tuesday'],
+        provided=IBroadcastMessages,
+        )
