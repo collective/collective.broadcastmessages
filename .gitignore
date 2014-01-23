@@ -3,4 +3,5 @@ develop-eggs/
 include/
 lib/
 parts/
-var
+var/
+coverage/
