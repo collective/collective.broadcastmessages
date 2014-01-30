@@ -19,12 +19,20 @@ Anonymous may not view broadcast messages
     Page should not contain element  css=div#broadcast-messages
     #Stop
 
-When no message configured, authenticated view no broadcast messages
+#When no message configured, authenticated user does not view any broadcast messages
+#    [Tags]  start
+#    Enable autologin as  Authenticated
+#    Go to  http://localhost:55001/plone/
+#    Page should contain  Plone site
+#    Page should not contain element  css=div#broadcast-messages
+
+When message is configured, authenticated user does view the broadcast messages
     [Tags]  start
     Enable autologin as  Authenticated
     Go to  http://localhost:55001/plone/
     Page should contain  Plone site
-    Page should not contain element  css=div#broadcast-messages
+    Page should contain element  css=div#broadcast-messages
+    Page should contain  maintenance
 
 *** Keywords ***
 
