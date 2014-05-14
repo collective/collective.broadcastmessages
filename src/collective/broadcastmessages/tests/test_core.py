@@ -1,7 +1,6 @@
 import unittest2 as unittest
 
 from zope.interface import alsoProvides
-from zope.component import getSiteManager
 
 from plone.app.testing import logout
 
@@ -34,12 +33,10 @@ class TestExample(unittest.TestCase):
         check that viewlet is included by main template
         when rendered for logged-in user
         """
-        from collective.broadcastmessages.interfaces import IBroadcastMessages
-        sm = getSiteManager(self.portal)
-        sm.registerUtility(
-            component=['message1', 'message2'],
-            provided=IBroadcastMessages,
+        from collective.broadcastmessages.messages import (
+            registerBroadcastMessages
             )
+        registerBroadcastMessages(self.portal, ['message1', 'message2'])
         from collective.broadcastmessages.browser.interfaces import (
             IBroadcastMessagesLayer,
             )
@@ -53,12 +50,10 @@ class TestExample(unittest.TestCase):
         check that viewlet is not included by main template
         when rendered for anonymous user
         """
-        from collective.broadcastmessages.interfaces import IBroadcastMessages
-        sm = getSiteManager(self.portal)
-        sm.registerUtility(
-            component=['message1', 'message2'],
-            provided=IBroadcastMessages,
+        from collective.broadcastmessages.messages import (
+            registerBroadcastMessages
             )
+        registerBroadcastMessages(self.portal, ['maintenance'])
         logout()
         from collective.broadcastmessages.browser.interfaces import (
             IBroadcastMessagesLayer,
@@ -67,12 +62,10 @@ class TestExample(unittest.TestCase):
         self.assertFalse('broadcast-messages' in self.portal())
 
     def test_viewlet_not_shown_when_no_messages(self):
-        from collective.broadcastmessages.interfaces import IBroadcastMessages
-        sm = getSiteManager(self.portal)
-        sm.registerUtility(
-            component=[],
-            provided=IBroadcastMessages,
+        from collective.broadcastmessages.messages import (
+            registerBroadcastMessages
             )
+        registerBroadcastMessages(self.portal, [])
         from collective.broadcastmessages.browser.interfaces import (
             IBroadcastMessagesLayer,
             )
@@ -94,6 +87,6 @@ class TestExample(unittest.TestCase):
             registerBroadcastMessages
             )
         alsoProvides(self.portal.REQUEST, IBroadcastMessagesLayer)
-        registerBroadcastMessages(self.portal)
+        registerBroadcastMessages(self.portal, ['maintenance', 'tuesday'])
         self.assertTrue('broadcast-messages' in self.portal())
         self.assertTrue('maintenance' in self.portal())

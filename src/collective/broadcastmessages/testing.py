@@ -50,4 +50,4 @@ def testSetup(portal_setup):
             'collective_broadcastmessages_testing.txt') is None:
         return
     portal = portal_setup.getSite()
-    registerBroadcastMessages(portal)
+    registerBroadcastMessages(portal, ['maintenance', 'tuesday'])
