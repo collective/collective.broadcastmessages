@@ -22,9 +22,9 @@ def initializeFromFileSystem(event):
         conn.close()
 
 
-def registerBroadcastMessages(portal):
+def registerBroadcastMessages(portal, messages):
     sm = getSiteManager(portal)
     sm.registerUtility(
-        component=['maintenance', 'tuesday'],
+        component=messages,
         provided=IBroadcastMessages,
         )
